@@ -12,9 +12,9 @@ class RoleSeeder extends Seeder
     {
         $roles = [
             ['role_name' => 'admin', 'description' => 'Administrator'],
-            ['role_name' => 'cashier', 'decription' => 'Kasir'],
-            ['role_name' => 'cashier', 'decription' => 'Koki'],
-            ['role_name' => 'cashier', 'decription' => 'Pelanggan'],
+            ['role_name' => 'cashier', 'description' => 'Kasir'],
+            ['role_name' => 'chef', 'description' => 'Koki'],
+            ['role_name' => 'customer', 'description' => 'Pelanggan'],  
         ];
 
         DB::table('roles')->insert($roles);

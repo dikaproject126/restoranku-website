@@ -52,7 +52,7 @@
                         <span class="text-light"><a href="#"><i class="fas fa-copyright text-light me-2"></i>Restoranku</a> <span id="currentYear"></span>. All right reserved.</span>
                     </div>
                     <div class="col-md-6 my-auto text-center text-md-end text-white">
-                        Designed By <a class="fw-bold  href="">Kelompok 1</a> Distributed By <a class="fw-bold" href="">Dika | Dhika | Phatra | Nathan | Ardy</a>
+                        Designed By <a class="fw-bold  href="">Kelompok 1</a>
                     </div>
                 </div>
             </div>
