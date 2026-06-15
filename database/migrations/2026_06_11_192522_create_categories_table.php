@@ -13,6 +13,7 @@ return new class extends Migration
             $table->string('cat_name')->unique();
             $table->text('description');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
