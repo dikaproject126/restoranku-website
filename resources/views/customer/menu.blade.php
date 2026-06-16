@@ -33,7 +33,9 @@
                                                 <p class="text-limited"> {{ $item->description }} </p>
                                                 <div class="d-flex justify-content-between flex-lg-wrap">
                                                     <p class="text-dark fs-5 fw-bold mb-0"> {{ 'Rp'. number_format($item->price, 0, ',', '.') }} </p>
-                                                    <a href="#" onclick="addToChart {{ $item->id }}" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Tambah Keranjang</a>
+                                                    <a href="#" onclick="event.preventDefault(); addToCart({{ $item->id }});" class="btn border border-secondary rounded-pill px-3 text-primary">
+                                                        <i class="fa fa-shopping-bag me-2 text-primary"></i> Tambah Keranjang
+                                                    </a>
                                                 </div>
                                             </div>
                                         </div>
@@ -65,18 +67,19 @@
 
 @section('script')
     <script>
-        function addToCart(menuId){
+        function addToCart(menuId) {
             fetch("{{ route('cart.add') }}", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
                 },
-                body: JSON.stringify({id: menu})
+
+                body: JSON.stringify({ id: menuId }) 
             })
-            .then(response=>response.json())
+            .then(response => response.json())
             .then(data => {
-                alert(data.message)
+                alert(data.message);
             })
             .catch((error) => {
                 console.error('Error:', error);

@@ -39,10 +39,10 @@ class MenuController extends Controller
             ]);
         }
 
-        $cart = Session::get('cart');
+        $cart = Session::get('cart', []);
 
         if(isset($cart[$menuId])){
-            $cart[$menuId]['quantity'] +=1;
+            $cart[$menuId]['qty'] +=1;
         } else {
             $cart[$menuId] = [
                 'id' => $menu->id,
@@ -60,6 +60,51 @@ class MenuController extends Controller
             'message' => 'Berhasil tambah keranjang',
             'cart' => $cart 
         ]);
+    }
+
+    public function updateCart(Request $request)
+    {
+        $itemId = $request->input('id');
+        $newQty = $request->input('qty');
+
+        if($newQty <= 0){
+            return response()->json([
+                'success' => false,
+            ]);
+        }
+
+        $cart = Session::get('cart');
+
+        if (isset($cart[$itemId])) {
+            $cart[$itemId]['qty'] = $newQty;
+            Session::put('cart', $cart);
+            Session::flash('success', 'Jumlah item berhasil diperbarui');
+
+            return response()->json(['success' => true]);
+        }
+
+        return response()->json(['success' => false]);
+    }
+
+    public function removeCart(Request $request)
+    {
+        $itemId = $request->input('id');
+        $cart = Session::get('cart');
+
+        if(isset($cart[$itemId])){
+            unset($cart[$itemId]);
+            Session::put('cart', $cart);
+            Session::flash('danger', 'Item Berhasil dihapus dari Keranjang');
+
+            return response()->json(['success' => true]);
+        }
+
+        return response()->json(['success' => false, 'mesage' => 'Gagal Menghapus Item']);
+    }
+
+    public function clearCart(){
+        Session::forget('cart');
+        return redirect()->route('cart')->with('danger', 'Keranjang Berhasil di Kosongkan');
     }
 }   
 
