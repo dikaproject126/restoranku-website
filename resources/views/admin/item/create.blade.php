@@ -13,7 +13,16 @@
 
 <div class="card">
             <div class="card-body">
-                <form class="form" action="{{ route('items.store') }}" enctype="multipart/form-data">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul class="mb-0">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                <form class="form" action="{{ route('items.store') }}" enctype="multipart/form-data" method="POST">
                     @csrf
                     <div class="form-body">
                         <div class="row">
@@ -45,7 +54,7 @@
 
                                 <div class="form-group">
                                     <label for="image">Gambar</label>
-                                    <input type="file" class="form-control" id="image" name="image" required>
+                                    <input type="file" class="form-control" id="image" name="img" required>
                                 </div>
 
                                 <div class="form-group">

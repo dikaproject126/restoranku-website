@@ -49,8 +49,8 @@
                                 <td> {{ Str::limit($item->description, 15) }} </td>
                                 <td> {{ 'Rp'. number_format($item->price, 0, ',', '.') }} </td>
                                 <td>
-                                    <span class="badge {{ $item->category->cat_name == 'Makanan' ? 'bg-warning' : 'bg-info' }}">
-                                        {{ $item->category->cat_name }}
+                                    <span class="badge {{ $item->category?->cat_name == 'Makanan' ? 'bg-warning' : 'bg-info' }}">
+                                        {{ $item->category?->cat_name ?? 'Tanpa Kategori' }}
                                     </span>
                                 </td>
                                 <td>
