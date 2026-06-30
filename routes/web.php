@@ -27,6 +27,7 @@ Route::get('/checkout/success/{orderId}', [MenuController::class, 'checkoutSucce
 Route::get('/dashboard', function() {
     return view('admin.dashboard');
 })->name('dashboard');
+
 Route::resource('categories', CategoryController::class);
 Route::resource('items', ItemController::class);
 Route::resource('roles', RoleController::class);
