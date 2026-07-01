@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-@section('title', 'Daftar Pesanan')
+@section('title', 'Detail Pesanan')
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('assets/admin/extensions/simple-datatables/style.css') }}">
@@ -11,8 +11,8 @@
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Daftar Pesanan</h3>
-                <p class="text-subtitle text-muted">Informasi pesanan yang masuk.</p>
+                <h3>Detail Pesanan</h3>
+                <p class="text-subtitle text-muted">Informasi detail pesanan yang masuk.</p>
             </div>
             {{-- <div class="col-12 col-md-6 order-md-2 order-first">
                 <a href="{{ route('items.create') }}" class="btn btn-primary float-start float-lg-end">
@@ -24,13 +24,19 @@
     </div>
     <section class="section">
         <div class="card">
+            <div class="card-header">
+                <h4>Kode Pesanan: {{ $orders->order_code }} </h4>
+            </div>
             <div class="card-body" >
-                @if (session('success'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <p> <i class="bi bi-check-circle-fill"></i> {{ session('success') }} </p>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                @endif
+                <div class="row"></div>
+            </div>
+        </div>
+
+    </section>
+
+    <section class="section">
+        <div class="card">
+            <div class="card-body" >
                 <table class="table table-striped" id="table1">
                     <thead>
                         <tr>
@@ -47,7 +53,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($orders as $order)
+                        {{-- @foreach ($orders as $order)
                             <tr>
                                 <td> {{ $loop->iteration }} </td>
                                 <td> {{ $order->order_code }} </td>
@@ -70,7 +76,7 @@
                                     </span>
                                 </td>
                             </tr>
-                        @endforeach
+                        @endforeach --}}
                     </tbody>
                 </table>
             </div>
