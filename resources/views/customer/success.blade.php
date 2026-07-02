@@ -9,9 +9,9 @@
             <h5 class="text-center mb-2">Pesanan Berhasil dibuat!</h5>
 
             @if($order->payment_method == 'tunai' && $order->status == 'pending')
-                <p class="text-center"><span class="badge bg-warning">Menunggu Pembayaran</span></p>
+                <p class="text-center"><span class="badge bg-danger">Menunggu Pembayaran</span></p>
             @elseif ($order->payment_method == 'qris' && $order->status == 'pending')
-                <p class="text-center"><span class="badge bg-success">Menunggu Konfirmasi Pembayaran</span></p>
+                <p class="text-center"><span class="badge bg-warning">Menunggu Konfirmasi Pembayaran</span></p>
             @else
                 <p class="text-center"><span class="badge bg-success">Pembayaran Berhasil, pesanan segera diproses</span></p>
             @endif
@@ -49,7 +49,7 @@
             @if ($order->payment_method == 'tunai')
                 <p class="small text-center">Tunjukan kode bayar ini di kasir untuk menyelesaikan pembayaran. </p>
             @elseif ($order->payment_method == 'qris')
-                <p class="small text-center">Yeay! Pembayaran sukses. Mohon ditunggu pesanannya yaa. </p>
+                <p class="small text-center">Yeay! Pembayaran sukses. Silahkan duduk manis. Mohon ditunggu pesanannya yaa. </p>
             @endif
             <hr>
             <a href="{{ route('menu') }}" class="btn btn-primary w-100 text-white">Kembali ke menu</a>

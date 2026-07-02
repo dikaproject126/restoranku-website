@@ -179,7 +179,7 @@ class MenuController extends Controller
             'status' => 'pending',
             'table_number' => $tableNumber,
             'payment_method' => $request->input('payment_method', 'tunai'),
-            'note' => $request->input('note', null),
+            'note' => $request->note,
         ]);
 
         foreach($cart as $itemId => $item){
@@ -205,15 +205,15 @@ class MenuController extends Controller
 
             $params = [
                 'transaction_details' => [
-                    'order_id' => $order -> order_code,
-                    'gross_amount' => (int) $order -> grand_total,
+                    'order_id' => $order->order_code,
+                    'gross_amount' => (int) $order->grand_total,
                 ],
                 'item_details' => $itemDetails,
                 'customer_details' => [
                     'first_name' => $user -> fullname ?? 'Guest',
                     'phone' => $user -> phone,
                 ], 
-                'enabled_payments' => 'qris',
+                'payment_method' => 'qris',
             ];  
 
             try{

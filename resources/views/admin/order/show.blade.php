@@ -28,7 +28,22 @@
                 <h4>Kode Pesanan: {{ $orders->order_code }} </h4>
             </div>
             <div class="card-body" >
-                <div class="row"></div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>Dibuat pada: {{ $orders->created_at->format('d-m-Y H:i') }}</p>
+                        <p>Nama Pelanggan: {{ $orders->user->fullname ?? 'Pelanggan Terhapus' }}</p>
+                        <p>Status:
+                            <span class="badge {{ $orders->status == 'settlement' ? 'bg-success' : ($orders->status == 'pending' ? 'bg-warning' : ($orders->status == 'cooked' ? 'bg-primary' : 'bg-danger'))}}">
+                                        {{ $orders->status }}
+                            </span>
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <p>No Meja: {{ $orders->table_number }} </p>
+                        <p>Metode Pembayaran {{ $orders->payment_method }} </p>
+                        <p>Catatan: {{ $order->note ?? '-' }} </p>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -36,52 +51,48 @@
 
     <section class="section">
         <div class="card">
+            <div class="card-header">
+                <h4>Daftar Menu yang Dipesan</h4>
+            </div>
             <div class="card-body" >
                 <table class="table table-striped" id="table1">
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Kode Pesanan</th>
-                            <th>Nama<br>Pelanggan</th>
-                            <th>Total</th>
-                            <th>Status</th>
-                            <th>No Meja</th>
-                            <th>Metode Pembayaran</th>
-                            <th>Catatan</th>
-                            <th>Dibuat pada</th>
-                            <th>Aksi</th>
+                            <th>Gambar</th>
+                            <th>Nama Menu</th>
+                            <th>Jumlah</th>
+                            <th>Harga</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- @foreach ($orders as $order)
+                        @foreach ($orderItems as $itemOrders)
                             <tr>
                                 <td> {{ $loop->iteration }} </td>
-                                <td> {{ $order->order_code }} </td>
-                                <td> {{ $order->user->fullname }} </td>
-                                <td> {{ 'Rp'. number_format($order->grand_total, 0, ',', '.') }} </td>
                                 <td>
-                                    <span class="badge {{ $order->status == 'settlement' ? 'bg-success' : ($order->status == 'pending' ? 'bg-warning' : ($order->status == 'cooked' ? 'bg-primary' : 'bg-danger'))}}">
-                                        {{ $order->status }}
-                                    </span>
+                                    <img src="{{ asset('img_item_upload/'. $itemOrders->item->img) }}" width="60" class="img-fluid rounded-top" alt="" onerror="this.onerror=null;this.src='{{ $itemOrders->item->img }}';">
                                 </td>
-                                <td>{{ $order->table_number }}</td>
-                                <td>{{ $order->payment_method }}</td>
-                                <td>{{ $order->note ?? '-'}}</td>
-                                <td>{{ $order->created_at->format('d-m-Y H:i')}}</td>
-                                <td>
-                                    <span class="badge bg-primary">
-                                        <a href="{{ route('orders.show', $order->id) }}" class="text-white">
-                                            <i class="bi bi-eye"></i> Lihat
-                                        </a>
-                                    </span>
-                                </td>
+                                <td> {{ $itemOrders->item->name }} </td>
+                                <td> {{ $itemOrders->quantity }} </td>
+                                <td> {{ 'Rp'. number_format($itemOrders->item->price, 0, ',', '.') }} </td>
                             </tr>
-                        @endforeach --}}
+                        @endforeach
                     </tbody>
+                        <tr>
+                            <th colspan="4" class="text-end">Total</th>
+                            <th>{{ 'Rp ' . number_format($orders->subtotal, 0, ',', '.') }}</th>
+                        </tr>
+                        <tr>
+                            <th colspan="4" class="text-end">Pajak</th>
+                            <th>{{ 'Rp ' . number_format($orders->tax, 0, ',', '.') }}</th>
+                        </tr>
+                        <tr>
+                            <th colspan="4" class="text-end">Grand Total</th>
+                            <th>{{ 'Rp ' . number_format($orders->grand_total, 0, ',', '.') }}</th>
+                        </tr>
                 </table>
             </div>
         </div>
-
     </section>
 </div>
 @endsection
