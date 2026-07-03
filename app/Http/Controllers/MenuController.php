@@ -146,8 +146,10 @@ class MenuController extends Controller
             return redirect()->route('checkout')->withErrors($validator);
         }
 
-        $totalAmount = 0;
-        $itemDetails = [];
+        $total= 0;
+        foreach ($cart as $item) {
+            $total += $item['price'] * $item['qty'];
+        }
 
         $totalAmount = 0;
         foreach( $cart as $item){
@@ -162,9 +164,11 @@ class MenuController extends Controller
         }
 
         $user = User::firstOrCreate(
-            ['phone' => $request->input('phone')], // Cari berdasarkan nomor HP
             [
+                'phone' => $request->input('phone'), 
                 'fullname' => $request->input('fullname'),
+            ],
+            [
                 'role_id' => 4,
                 'password' => Hash::make($request->input('phone')),
             ]
@@ -213,7 +217,7 @@ class MenuController extends Controller
                     'first_name' => $user -> fullname ?? 'Guest',
                     'phone' => $user -> phone,
                 ], 
-                'payment_method' => 'qris',
+                'payment_type' => 'qris',
             ];  
 
             try{
@@ -241,8 +245,12 @@ class MenuController extends Controller
         if(!$order){
             return redirect()->route('menu')->with('error', 'Pesanan tidak ditemukan');
         }
-
         $orderItems = OrderItem::where('order_id', $order->id)->get();
+
+        if($order->payment_method == 'qris') {
+            $order->status = 'settlement';
+            $order->save();
+        }
 
         return view('customer.success', compact('order', 'orderItems'));
     }
