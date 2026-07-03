@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\OrderItem;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -22,13 +23,19 @@ class OrderController extends Controller
         return view('admin.order.show', compact('orders', 'orderItems'));
     }
 
-    public function settlement($id)
+    public function updateStatus($id)
     {
         $order = Order::findOrFail($id);
 
-        $order->status = 'settlement';
-        $order->save();
-
-        return redirect()->route('orders.index')->with('success', 'Order settlement successfully');
+        if(Auth::user()->role->role_name == 'admin' || Auth::user()->role->role_name == 'cashier'){
+            $order->status = 'settlement';
+            $order->save();
+            return redirect()->route('orders.index')->with('success', 'Order settlement successfully');
+        } else{
+            $order->status = 'cooked';
+            $order->save();
+            return redirect()->route('orders.index')->with('success', 'Order cooked successfully');
+        }
+        
     }
 }

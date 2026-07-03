@@ -31,9 +31,6 @@ Route::middleware('role:admin')->group(function(){
     Route::resource('users', UserController::class);
 });
 
-Route::middleware('role:admin|cashier')->group(function(){
-    Route::post('orders/{order}', [OrderController::class, 'settlement'])->name('orders.settlement');
-});
 
 Route::middleware('role:admin|cashier|chef')->group(function(){
     Route::get('/dashboard', function() {
@@ -42,6 +39,7 @@ Route::middleware('role:admin|cashier|chef')->group(function(){
     Route::resource('items', ItemController::class);
     Route::resource('orders', OrderController::class);
     Route::post('items/update-status/{order}', [ItemController::class, 'updateStatus'])->name('item.updateStatus');
+    Route::post('orders/settlement/{order}', [OrderController::class, 'updateStatus'])->name('orders.updateStatus');
 });
 
 
