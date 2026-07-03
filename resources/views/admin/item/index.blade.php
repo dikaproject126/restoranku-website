@@ -41,7 +41,7 @@
                             <th>Harga</th>
                             <th>Kategori</th>
                             <th>Status</th>
-                            <th>Aksi</th>
+                            <th colspan="2">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -68,7 +68,8 @@
                                     <a href="{{ route('items.edit', $item->id) }}" class="btn btn-warning btn-sm">
                                         <i class="bi bi-pencil-square"></i> Ubah
                                     </a>
-
+                                </td>
+                                <td>
                                     @if ($item->is_active == 1)
                                         <form action="{{ route('item.updateStatus', $item->id) }}" method="POST">
                                             @csrf
@@ -86,15 +87,6 @@
                                             </button>
                                         </form>
                                     @endif
-
-
-                                    {{-- <form action="{{ route('items.destroy', $item->id) }}" method="POST" class="d-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah anda yakin ingin menghapus menu ini? ')">
-                                            <i class="bi bi-trash"></i> Hapus
-                                        </button>
-                                    </form> --}}
                                 </td>
                             </tr>
                         @endforeach
