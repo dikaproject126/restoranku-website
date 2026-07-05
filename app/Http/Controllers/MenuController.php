@@ -24,6 +24,30 @@ class MenuController extends Controller
         return view('customer.menu', compact('items', 'tableNumber'));
     }
 
+    public function home(Request $request)
+    {
+        $tableNumber = $request->query('meja');
+        if($tableNumber){
+            Session::put('tableNumber', $tableNumber);
+        }
+
+        // Get the specific items for "Menu Andalan Kami"
+        $featuredItems = Item::with('category')
+            ->where('is_active', 1)
+            ->whereIn('name', ['Nasi Goreng Kampung', 'Sate Ayam Madura', 'Rendang Daging Sapi'])
+            ->get();
+
+        // If not found, fallback to first 3 active items
+        if ($featuredItems->count() < 3) {
+            $featuredItems = Item::with('category')
+                ->where('is_active', 1)
+                ->limit(3)
+                ->get();
+        }
+
+        return view('customer.home', compact('featuredItems', 'tableNumber'));
+    }
+
     // CART
     
     public function cart()

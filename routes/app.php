@@ -9,9 +9,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return redirect()->route('menu');
-});
+Route::get('/', [MenuController::class, 'home'])->name('home');
 
 Route::get('/menu', [MenuController::class, 'index'])->name('menu');
 Route::get('/cart', [MenuController::class, 'cart'])->name('cart');
