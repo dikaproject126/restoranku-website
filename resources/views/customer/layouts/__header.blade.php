@@ -22,4 +22,6 @@
         <link href="{{ asset('assets/customer/css/bootstrap.min.css') }}" rel="stylesheet">
 
         <link href="{{ asset('assets/customer/css/style.css') }}" rel="stylesheet">
+
+        @stack('styles')
     </head>

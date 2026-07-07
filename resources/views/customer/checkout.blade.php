@@ -32,7 +32,16 @@
                                 <div class="col-md-12 col-lg-4">
                                     <div class="form-item w-100">
                                         <label class="form-label my-3">Nomor Meja</label>
-                                        <input type="text" class="form-control" value="{{ $tableNumber ?? 'Tidak ada number meja'}}" disabled required>
+                                        <input type="text" 
+                                            id="table_number"
+                                            name="table_number" 
+                                            class="form-control" 
+                                            value="{{ old('table_number', $tableNumber ?? '') }}" 
+                                            placeholder="Contoh: 12" 
+                                            required>
+                                        <small class="text-muted mt-1 d-block">
+                                            *Jika ingin takeaway, ketik <strong>'takeaway'.</strong>
+                                        </small>
                                     </div>
                                 </div>
                             </div>   

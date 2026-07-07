@@ -9,11 +9,10 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return redirect()->route('menu');
-});
-
+Route::get('/', [MenuController::class, 'home'])->name('home');
+Route::view('/contact', 'customer.contact')->name('contact');
 Route::get('/menu', [MenuController::class, 'index'])->name('menu');
+
 Route::get('/cart', [MenuController::class, 'cart'])->name('cart');
 Route::post('/cart/add', [MenuController::class, 'addToCart'])->name('cart.add');
 Route::post('/cart/update',[MenuController::class, 'updateCart'])->name('cart.update');

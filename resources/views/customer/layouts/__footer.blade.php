@@ -1,4 +1,4 @@
-        <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5">
+        <div id="footer" class="container-fluid bg-dark text-white-50 footer pt-5 mt-5">
             <div class="container py-5">
                 <div class="pb-4 mb-4" style="border-bottom: 1px solid rgba(226, 175, 24, 0.5) ;">
                     <div class="row g-4">
@@ -36,8 +36,10 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="d-flex flex-column text-start footer-item">
                             <h4 class="text-light mb-3">Metode Pembayaran</h4>
-                            <a class="btn-link" href="">QRIS</a>
-                            <a class="btn-link" href="">Tunai</a>
+                            <div class="d-flex flex-column gap-2 text-white-50">
+                                <div><i class="fas fa-check-circle text-primary me-2"></i>QRIS</div>
+                                <div><i class="fas fa-check-circle text-primary me-2"></i>Tunai</div>
+                            </div>
                         </div>
                     </div>
                 </div>
