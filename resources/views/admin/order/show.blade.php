@@ -41,7 +41,7 @@
                     <div class="col-md-6">
                         <p>No Meja: {{ $orders->table_number }} </p>
                         <p>Metode Pembayaran {{ $orders->payment_method }} </p>
-                        <p>Catatan: {{ $order->note ?? '-' }} </p>
+                        <p>Catatan: {{ $orders->note ?? '-'}} </p>
                     </div>
                 </div>
             </div>

@@ -155,11 +155,16 @@ class MenuController extends Controller
     public function storeOrder(Request $request)
     {
         $cart = Session::get('cart');
-        $tableNumber = Session::get('tableNumber');
 
         if(empty($cart)){
             return redirect()->route('cart')->with('error', 'Keranjang masih kosong');
         }
+
+        $validator = Validator::make($request->all(), [
+            'fullname' => 'required|string|max:255',
+            'phone' => 'required|string|max:15',
+            'table_number' => 'required|string|max:50',
+        ]);
 
         $validator = Validator::make($request->all(), [
             'fullname' => 'required|string|max:255',
@@ -169,6 +174,8 @@ class MenuController extends Controller
         if($validator->fails()){
             return redirect()->route('checkout')->withErrors($validator);
         }
+
+        $tableNumber = $request->input('table_number');
 
         $total= 0;
         foreach ($cart as $item) {
@@ -198,8 +205,10 @@ class MenuController extends Controller
             ]
         );
 
+        $orderCode = 'ORD-' . strtoupper(str_replace(' ', '', $tableNumber)) . '-' . time();
+
         $order = Order::create([
-            'order_code' => 'ORD-'. $tableNumber. '-' .time(),
+            'order_code' => $orderCode,
             'user_id' => $user->id,
             'subtotal' => $totalAmount,
             'tax' => 0.1 * $totalAmount,

@@ -1,4 +1,4 @@
-@extends('costumer.layouts.master')
+@extends('customer.layouts.master')
 
 @section('content')
 <section class="main-hero">
@@ -28,7 +28,7 @@
         </p>
 
         <!-- WhatsApp -->
-        <a href="https://wa.me/6289542825683?text=Halo%20Admin%20Restoranku%20%F0%9F%91%8B%0A%0ASaya%20ingin%20melakukan%20pemesanan%20makanan.%0A%0ANama%3A%0AMenu%20yang%20dipesan%3A%0AJumlah%3A%0AAlamat%20Pengiriman%3A%0A%0ATerima%20kasih."
+        <a href="https://wa.me/62895428256833?text=Halo%20Admin%20Restoranku%20%F0%9F%91%8B%0A%0ASaya%20ingin%20melakukan%20pemesanan%20makanan.%0A%0ANama%3A%0AMenu%20yang%20dipesan%3A%0AJumlah%3A%0AAlamat%20Pengiriman%3A%0A%0ATerima%20kasih."
            target="_blank">
 
             <div class="contact-item">
@@ -118,7 +118,7 @@ href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <style>
 .main-hero{
     height:340px;
-    background-image:url("hero.png");
+    background-image: url("{{ asset('img_item_upload/hero.png') }}");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -133,6 +133,7 @@ href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
     flex-direction:column;
     justify-content:center;
     align-items:center;
+    padding-top: 80px;
 }
 
 .hero-overlay h1{
@@ -143,7 +144,7 @@ href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 
 .hero-overlay p{
     color:#8BC34A;
-    margin-top:15px;
+    margin-top:;
     font-size:18px;
 }
 

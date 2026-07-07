@@ -435,8 +435,8 @@
                                 <h3 class="menu-title">{{ $item->name }}</h3>
                                 <p class="menu-desc">{{ $item->description }}</p>
                             </div>
-                            <div class="menu-footer">
-                                <button onclick="addToCart({{ $item->id }})" class="btn btn-pesan-sm px-4">Pesan Sekarang</button>
+                            <div class="menu-footer ">
+                                <button onclick="addToCart({{ $item->id }})" class="btn btn-pesan-sm px-4 me-auto">Pesan Sekarang</button>
                             </div>
                         </div>
                     </div>

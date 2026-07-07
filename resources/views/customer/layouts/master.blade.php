@@ -21,6 +21,8 @@
         @include('customer.layouts.__footer')
         <!-- Footer End -->
 
+        @stack('scripts')
+
 
 
         <!-- Back to Top -->
