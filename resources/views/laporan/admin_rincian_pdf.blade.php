@@ -58,15 +58,21 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($orders as $key => $order)
+            @forelse($orders as $key => $order)
             <tr>
                 <td>{{ $key + 1 }}</td>
                 <td>#{{ $order->id }}</td>
                 <td>{{ $order->created_at->format('d-m-Y H:i') }}</td>
                 <td>{{ optional($order->user)->name ?? optional($order->user)->fullname ?? 'Guest Checkout' }}</td>
-                <td class="text-right">Rp {{ number_format($order->total_harga, 0, ',', '.') }}</td>
+                <td class="text-right">Rp {{ number_format($order->grand_total, 0, ',', '.') }}</td>
             </tr>
-            @endforeach
+            @empty
+            <tr>
+                <td colspan="5" style="text-align: center; color: #999; padding: 20px;">
+                    Tidak ada data pesanan dengan status 'settlement' atau 'capture'.
+                </td>
+            </tr>
+            @endforelse
             
             <tr style="background-color: #eaecf4;">
                 <td colspan="4" class="font-bold text-right">Akumulasi Total Pendapatan:</td>
