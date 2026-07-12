@@ -63,7 +63,7 @@
                 <td>{{ $key + 1 }}</td>
                 <td>#{{ $order->id }}</td>
                 <td>{{ $order->created_at->format('d-m-Y H:i') }}</td>
-                <td>{{ $order->user->fullname  ?? 'Guest Checkout' }}</td>
+                <td>{{ optional($order->user)->name ?? optional($order->user)->fullname ?? 'Guest Checkout' }}</td>
                 <td class="text-right">Rp {{ number_format($order->total_harga, 0, ',', '.') }}</td>
             </tr>
             @endforeach
