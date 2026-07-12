@@ -10,8 +10,6 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LaporanController;
 
-Route::get('/', [MenuController::class, 'home'])->name('home');
-Route::view('/contact', 'customer.contact')->name('contact');
 Route::get('/menu', [MenuController::class, 'index'])->name('menu');
 
 Route::get('/cart', [MenuController::class, 'cart'])->name('cart');
