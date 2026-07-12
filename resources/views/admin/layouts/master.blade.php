@@ -13,10 +13,6 @@
             </header>
             @yield('content')
 
-            @include('admin.layouts.__footer')
-
-
-
         </div>
     </div>
 
