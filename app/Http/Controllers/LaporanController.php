@@ -11,7 +11,7 @@ class LaporanController extends Controller
     public function cetakRincianAdmin()
     {
         $orders = Order::with(['user'])
-                            ->whereIn('status', ['settlement', 'capture']) 
+                            ->whereIn('status', ['settlement', 'cooked']) 
                             ->orderBy('created_at', 'desc')
                             ->get();
 
