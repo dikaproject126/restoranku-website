@@ -11,17 +11,15 @@ class LaporanController extends Controller
     public function cetakRincianAdmin()
     {
         $orders = Order::with(['user'])
-                        ->where('status', 'success') 
-                        ->orderBy('created_at', 'desc')
-                        ->get();
+                    ->whereIn('status', ['settlement', 'capture']) 
+                    ->orderBy('created_at', 'desc')
+                    ->get();
 
         $totalPesanan = $orders->count();
-        $totalPendapatan = $orders->sum('total_price'); 
+        $totalPendapatan = $orders->sum('total_price'); // Pastikan 'total_price' sesuai nama kolom harga di database kamu
 
-        // 3. Lempar data ke view blade
         $pdf = Pdf::loadView('laporan.admin_rincian_pdf', compact('orders', 'totalPesanan', 'totalPendapatan'));
 
-        // 4. Stream langsung ke browser
         return $pdf->stream('laporan-rincian-admin.pdf');
     }
 }
