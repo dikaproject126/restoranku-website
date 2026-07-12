@@ -16,7 +16,7 @@ class LaporanController extends Controller
                     ->get();
 
         $totalPesanan = $orders->count();
-        $totalPendapatan = $orders->sum('total_price'); // Pastikan 'total_price' sesuai nama kolom harga di database kamu
+        $totalPendapatan = $orders->sum('grand_total'); // Pastikan 'total_price' sesuai nama kolom harga di database kamu
 
         $pdf = Pdf::loadView('laporan.admin_rincian_pdf', compact('orders', 'totalPesanan', 'totalPendapatan'));
 

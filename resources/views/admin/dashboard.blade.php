@@ -6,12 +6,18 @@
 @endsection
 
 @section('content')
-            <div class="page-heading">
-                <h3>Selamat Datang, {{ Auth::user()->fullname }} </h3>
-                <a href="{{ route('admin.cetak.laporan') }}" target="_blank" class="btn btn-primary icon icon-left">
-                    <i class="bi bi-printer"></i> Cetak Rincian Pendapatan
-                </a>
-            </div> 
+            <div class="page-title mb-4">
+                <div class="row align-items-center">
+                    <div class="col-12 col-md-6">
+                        <h3 class="mb-0">Selamat Datang, Admin</h3>
+                    </div>
+                    <div class="col-12 col-md-6 text-end">
+                        <a href="{{ route('admin.cetak.laporan') }}" target="_blank" class="btn btn-primary">
+                            <i class="bi bi-printer-fill me-2"></i> Cetak Rincian Pendapatan
+                        </a>
+                    </div>
+                </div>
+            </div>
             <div class="page-content"> 
                 <section class="row">
                     <div class="col-12 col-lg-12">
