@@ -8,6 +8,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LaporanController;
 
 Route::get('/', [MenuController::class, 'home'])->name('home');
 Route::view('/contact', 'customer.contact')->name('contact');
@@ -29,6 +30,7 @@ Route::middleware('role:admin')->group(function(){
     Route::resource('categories', CategoryController::class);
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
+    Route::get('/admin/laporan/cetak-rincian', [LaporanController::class, 'cetakRincianAdmin'])->name('admin.cetak.laporan');
 });
 
 

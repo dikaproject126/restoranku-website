@@ -8,6 +8,9 @@
 @section('content')
             <div class="page-heading">
                 <h3>Selamat Datang, {{ Auth::user()->fullname }} </h3>
+                <a href="{{ route('admin.cetak.laporan') }}" target="_blank" class="btn btn-primary icon icon-left">
+                    <i class="bi bi-printer"></i> Cetak Rincian Pendapatan
+                </a>
             </div> 
             <div class="page-content"> 
                 <section class="row">
